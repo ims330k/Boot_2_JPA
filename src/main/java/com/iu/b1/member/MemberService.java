@@ -21,6 +21,12 @@ public class MemberService {
 	@Autowired
 	private FileSaver fileSaver;
 	
+	
+	public boolean memberIdCheck(String id)throws Exception{
+		return memberRepository.existsById(id);
+	}
+	
+	
 	public MemberVO memberLogin(MemberVO memberVO)throws Exception{
 		return memberRepository.findByIdAndPw(memberVO.getId(), memberVO.getPw());
 	}

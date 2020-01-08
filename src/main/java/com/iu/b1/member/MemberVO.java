@@ -22,6 +22,7 @@ public class MemberVO {
 	@NotEmpty
 	private String id;
 	//@Column(name = "password")
+	
 	private String pw;
 	
 	@Transient

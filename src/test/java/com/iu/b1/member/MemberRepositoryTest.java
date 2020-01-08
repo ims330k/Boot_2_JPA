@@ -17,8 +17,34 @@ class MemberRepositoryTest {
 	@Autowired
 	private MemberFilesRepository memberFilesRepository;
 
-	
+
 	@Test
+	void updateTest() {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("iu4");
+		memberVO.setPw("iu4");
+		memberVO.setName("iu4Rename");
+		memberVO.setEmail("iu4@iu4ReEmail");
+		
+		MemberFilesVO memFilesVO = new MemberFilesVO();
+		memFilesVO.setFnum(2);
+		memFilesVO.setFname("iu4ReImage.jsp");
+		memFilesVO.setOname("iu4ReOname.jsp");
+		
+		memberVO.setMemberFilesVO(memFilesVO);
+		memFilesVO.setMemberVO(memberVO);
+		
+		memberRepository.save(memberVO);
+	}
+	
+	
+//	@Test
+	void deleteTest() {
+		memberRepository.deleteById("admin");
+	}
+	
+	
+//	@Test
 	void InsertTest() {
 		MemberVO memVo = new MemberVO();
 		memVo.setId("iu10");
