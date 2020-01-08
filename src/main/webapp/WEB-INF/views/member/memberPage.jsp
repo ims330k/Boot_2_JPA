@@ -15,6 +15,8 @@
 	<h1>Name : ${member.name}</h1>
 	<h1>Email : ${member.email}</h1>
 	<h1>Photo</h1>
+	<h3>${member.memberFilesVO.fname}</h3>
+	<h3>${member.memberFilesVO.oname}</h3>
 	<img alt="" src="../upload/${member.memberFilesVO.fname}">
 	<a class="btn btn-primary" href="./memberFileDown?fnum=${member.memberFilesVO.fnum}">FileDown</a>
 </div>

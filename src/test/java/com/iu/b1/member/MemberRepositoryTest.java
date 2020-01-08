@@ -14,8 +14,49 @@ class MemberRepositoryTest {
 	
 	@Autowired
 	private MemberRepository memberRepository;
+	@Autowired
+	private MemberFilesRepository memberFilesRepository;
 
+	
 	@Test
+	void InsertTest() {
+		MemberVO memVo = new MemberVO();
+		memVo.setId("iu10");
+		memVo.setPw("iu10");
+		memVo.setName("iu10");
+		memVo.setEmail("iu10@iu10");
+		MemberFilesVO memberFilesVO = new MemberFilesVO();
+		
+		memberFilesVO.setFname("iu10Fnanme.jpg");
+		memberFilesVO.setOname("iu10name.jpg");
+		
+		memVo.setMemberFilesVO(memberFilesVO);
+		memberFilesVO.setMemberVO(memVo);
+		//memberRepository.save(memVo);
+		memberFilesRepository.save(memberFilesVO);
+		
+		
+		
+	}
+	
+//	@Test
+	void SelectTest() {
+		Optional<MemberVO> opt = memberRepository.findById("iu4");
+		MemberVO memberVO = opt.get();
+		System.out.println(memberVO.getName());
+		System.out.println(memberVO.getEmail());
+		System.out.println(memberVO.getMemberFilesVO().getFname());
+		System.out.println(memberVO.getMemberFilesVO().getMemberVO().getId());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+//	@Test
 	void test() {
 		
 		//long count = memberRepository.count();

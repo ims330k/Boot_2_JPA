@@ -23,12 +23,6 @@
 	</form>
 	
 
-	<h1>
-		<c:if test="${not empty member}">
-			<spring:message code="loginMessage" arguments="${member.id}, ${member.email}" argumentSeparator="," ></spring:message>
-			
-		</c:if>
-	</h1>
 	
 	<div class="container">
 		<img alt="iu1.jpg" src="./images/iu1.jpg">
