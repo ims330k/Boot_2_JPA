@@ -22,7 +22,7 @@ public class MemberService {
 	private FileSaver fileSaver;
 	
 	
-	public void memberUpdate(MemberVO memberVO, MultipartFile files)throws Exception{
+	public MemberVO memberUpdate(MemberVO memberVO, MultipartFile files)throws Exception{
 		
 		if(files.getSize()>0) {
 			File file = filePathGenerator.getUseClassPathResource("upload");
@@ -35,7 +35,7 @@ public class MemberService {
 			memberFilesVO.setMemberVO(memberVO);
 		}
 		
-		memberRepository.save(memberVO);
+		return memberRepository.save(memberVO);
 		
 	}
 	

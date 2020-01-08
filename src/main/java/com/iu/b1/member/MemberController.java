@@ -44,7 +44,9 @@ public class MemberController {
 		System.out.println(memberVO.getMemberFilesVO());
 		memberVO.setMemberFilesVO(loginVO.getMemberFilesVO());
 		
-		memberService.memberUpdate(memberVO, files);
+		memberVO = memberService.memberUpdate(memberVO, files);
+		
+		session.setAttribute("member", memberVO);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("message", "Update Success");
