@@ -38,6 +38,25 @@ public class MemberController {
 		model.addAttribute("memberVO", memberVO);
 	}
 	
+	@PostMapping("memberUpdate")
+	public ModelAndView memberUpdate(MemberVO memberVO,MultipartFile files, HttpSession session)throws Exception{
+		MemberVO loginVO = (MemberVO)session.getAttribute("member");
+		System.out.println(memberVO.getMemberFilesVO());
+		memberVO.setMemberFilesVO(loginVO.getMemberFilesVO());
+		
+		memberService.memberUpdate(memberVO, files);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("message", "Update Success");
+		mv.addObject("path", "../");
+		
+		mv.setViewName("common/result");
+		
+		return mv;
+		
+	}
+	
+	
 //	@GetMapping("memberFileDown")
 //	public ModelAndView memberFileDown(MemberFilesVO memberFilesVO)throws Exception{
 //		ModelAndView mv = new ModelAndView();

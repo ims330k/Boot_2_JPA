@@ -22,6 +22,23 @@ public class MemberService {
 	private FileSaver fileSaver;
 	
 	
+	public void memberUpdate(MemberVO memberVO, MultipartFile files)throws Exception{
+		
+		if(files.getSize()>0) {
+			File file = filePathGenerator.getUseClassPathResource("upload");
+			String fileName = fileSaver.save(file, files);
+			MemberFilesVO memberFilesVO = memberVO.getMemberFilesVO();
+			memberFilesVO.setFname(fileName);
+			memberFilesVO.setOname(files.getOriginalFilename());
+			
+			memberVO.setMemberFilesVO(memberFilesVO);
+			memberFilesVO.setMemberVO(memberVO);
+		}
+		
+		memberRepository.save(memberVO);
+		
+	}
+	
 	public boolean memberIdCheck(String id)throws Exception{
 		return memberRepository.existsById(id);
 	}
