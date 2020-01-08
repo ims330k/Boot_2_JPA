@@ -31,6 +31,13 @@ public class MemberController {
 		return memberService.memberIdCheck(id);
 	}
 	
+	@GetMapping("memberDelete")
+	public String memberDelete(HttpSession session)throws Exception{
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		memberService.memberDelete(memberVO);
+		session.invalidate();
+		return "redirect:../";
+	}
 	
 	@GetMapping("memberUpdate")
 	public void memberUpdate(HttpSession session, Model model)throws Exception{

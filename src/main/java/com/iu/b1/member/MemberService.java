@@ -21,6 +21,9 @@ public class MemberService {
 	@Autowired
 	private FileSaver fileSaver;
 	
+	public void memberDelete(MemberVO memberVO)throws Exception{
+		memberRepository.deleteById(memberVO.getId());
+	}
 	
 	public MemberVO memberUpdate(MemberVO memberVO, MultipartFile files)throws Exception{
 		
