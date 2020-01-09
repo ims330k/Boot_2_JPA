@@ -42,6 +42,9 @@ public class NoticeController {
 	@PostMapping("noticeWrite")
 	public String noticeWrite(NoticeVO noticeVO, List<MultipartFile> files)throws Exception{
 		files.remove(0);
+		for(MultipartFile multipartFile:files) {
+			System.out.println(multipartFile.getOriginalFilename());
+		}
 		noticeService.boardWrite(noticeVO, files);
 		return "redirect:./noticeList";
 	}

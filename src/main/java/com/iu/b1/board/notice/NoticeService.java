@@ -32,26 +32,31 @@ public class NoticeService {
 	public void boardWrite(NoticeVO noticeVO, List<MultipartFile> files)throws Exception{
 		List<NoticeFilesVO> noticeFilesVOs = null;
 		//---- 파일의 유무 검증
+		
+		boolean check=false;
+		
 		if(files.size()>0) {
 			for(MultipartFile multipartFile: files) {
-				if(multipartFile.getSize() <=0) {
-					//check=true;
-					//break;
-					files.remove(multipartFile);
+				if(multipartFile.getSize() > 0) {
+					check=true;
+					break;
 				}
 			}
 			
+			
 			//for 끝
-			if(files.size()>0) {
+			if(check) {
 				noticeFilesVOs = new ArrayList<NoticeFilesVO>();
 				for(MultipartFile multipartFile:files) {
-					NoticeFilesVO noticeFilesVO = new NoticeFilesVO();
-					File file = filePathGenerator.getUseClassPathResource("upload");
-					String fileName = fileSaver.save(file, multipartFile);
-					noticeFilesVO.setFname(fileName);
-					noticeFilesVO.setOname(multipartFile.getOriginalFilename());
-					noticeFilesVOs.add(noticeFilesVO);
-					noticeFilesVO.setNoticeVO(noticeVO);
+					if(multipartFile.getSize()>0) {
+						NoticeFilesVO noticeFilesVO = new NoticeFilesVO();
+						File file = filePathGenerator.getUseClassPathResource("upload");
+						String fileName = fileSaver.save(file, multipartFile);
+						noticeFilesVO.setFname(fileName);
+						noticeFilesVO.setOname(multipartFile.getOriginalFilename());
+						noticeFilesVOs.add(noticeFilesVO);
+						noticeFilesVO.setNoticeVO(noticeVO);
+					}
 				}
 				
 				noticeVO.setNoticeFilesVOs(noticeFilesVOs);
