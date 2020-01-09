@@ -9,12 +9,15 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.b1.board.BoardVO;
 import com.iu.b1.util.FilePathGenerator;
 import com.iu.b1.util.FileSaver;
+import com.iu.b1.util.Pager;
 
 @Service
 @Transactional
@@ -78,8 +81,17 @@ public class NoticeService {
 		return noticeRepository.findById(num);
 	}
 	
-	public List<NoticeVO> boardList()throws Exception{
-		return noticeRepository.findByNumGreaterThanOrderByNumDesc(0);
+	public Pager boardList(Pager pager)throws Exception{
+		pager.makePageRequest();
+		Page<NoticeVO> p  = noticeRepository.findByNumGreaterThanOrderByNumDesc(0, pager.getPageable());
+		pager.setPageList(p);
+		pager.makeNum();
+		System.out.println(p.isFirst());
+		System.out.println(p.isLast());
+		System.out.println(p.getNumber());
+		System.out.println(p.getTotalPages());
+		
+		return pager;
 	}
 
 }

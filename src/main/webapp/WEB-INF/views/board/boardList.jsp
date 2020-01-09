@@ -25,7 +25,7 @@
 			<td>HIT</td>
 		</tr>
 		
-		<c:forEach items="${list}" var="vo">
+		<c:forEach items="${pager.pageList.content}" var="vo">
 			<tr>
 				<td>${vo.num}</td>
 				<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
@@ -37,6 +37,18 @@
 	
 	</table>
 	
+	<div>
+		<c:if test="${pager.curBlock > 1}">
+			<a href="./${board}List?curPage=${pager.startNum-1}">[이전]</a>
+		</c:if>
+		<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+			<a href="./${board}List?curPage=${i}">${i}</a>
+		</c:forEach>
+		<c:if test="${pager.curBlock < pager.totalBlock}">
+			<a href="./${board}List?curPage=${pager.startNum-1}">[다음]</a>
+		</c:if>
+	
+	</div>
 
 </div>
 

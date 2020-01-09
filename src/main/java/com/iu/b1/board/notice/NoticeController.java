@@ -7,6 +7,9 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.b1.board.BoardVO;
+import com.iu.b1.util.Pager;
 
 @Controller
 @RequestMapping("/notice/**")
@@ -67,10 +71,16 @@ public class NoticeController {
 	}
 	
 	@GetMapping("noticeList")
-	public ModelAndView noticeList(Model model)throws Exception{
+	public ModelAndView noticeList(Model model, Pager pager)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<NoticeVO> ar = noticeService.boardList();
-		mv.addObject("list", ar);
+		
+		
+		//Pageable pageable2 = PageRequest.of(0, 10, Sort.Direction.ASC, "num");
+		
+		
+		//List<NoticeVO> ar = noticeService.boardList(pageable2);
+		pager = noticeService.boardList(pager);
+		mv.addObject("list", pager);
 		mv.setViewName("board/boardList");
 		return mv;
 	}
