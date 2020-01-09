@@ -25,7 +25,7 @@
 			<td>HIT</td>
 		</tr>
 		
-		<c:forEach items="${pager.pageList.content}" var="vo">
+		<c:forEach items="${list.pageList.content}" var="vo">
 			<tr>
 				<td>${vo.num}</td>
 				<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>

@@ -85,9 +85,10 @@ public class NoticeService {
 	
 	public Pager boardList(Pager pager)throws Exception{
 		// PageRequest 생성
-		pager.makePageRequest(Direction.DESC, "num");
+		//Sort.by("num").descending().and(Sort.by("").ascending()
+		pager.makePageRequest(Sort.by("num").descending());
 		
-		Page<NoticeVO> p  = noticeRepository.findByNumGreaterThanOrderByNumDesc(0, pager.getPageable());
+		Page<NoticeVO> p  = noticeRepository.findByNumGreaterThan(0, pager.getPageable());
 		
 		
 		pager.setPageList(p);

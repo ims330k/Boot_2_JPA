@@ -49,8 +49,11 @@ public class Pager {
 
 
 	
-	public void makePageRequest(Direction direction, String name) {
-		this.pageable = PageRequest.of(this.getCurPage(), this.getPerPage(),direction, name);
+//	public void makePageRequest(Direction direction, String name) {
+//		this.pageable = PageRequest.of(this.getCurPage(), this.getPerPage(),direction, name);
+//	}
+	public void makePageRequest(Sort sort) {
+		this.pageable = PageRequest.of(this.getCurPage(), this.getPerPage(),sort);
 	}
 
 	
