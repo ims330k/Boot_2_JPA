@@ -11,6 +11,11 @@
 <body>
 <c:import url="../template/nav.jsp"></c:import>
 <div class="contents">
+	<div>
+		<a href="./${board}Write" class="btn btn-danger">Write</a>
+	
+	</div>
+
 	<table class="table table-hover">
 		<tr>
 			<td>NUM</td>
@@ -23,7 +28,7 @@
 		<c:forEach items="${list}" var="vo">
 			<tr>
 				<td>${vo.num}</td>
-				<td>${vo.title}</td>
+				<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
 				<td>${vo.writer}</td>
 				<td>${vo.regDate}</td>
 				<td>${vo.hit}</td>
@@ -34,18 +39,6 @@
 	
 
 </div>
-	<div class="contents">
-		<c:if test="${pager.curBlock>1}">
-			<a href="./noticeList?curPage=${pager.startNum-1}">[이전]</a>
-		</c:if>
-		
-		<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-			<a href="./noticeList?curPage=${i}">${i}</a>
-		</c:forEach>
-		
-		<c:if test="${pager.curBlock<pager.totalBlock}">
-			<a href="./noticeList?curPage=${pager.lastNum+1}">[다음]</a>
-		</c:if>
-	</div>
+
 </body>
 </html>
