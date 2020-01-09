@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,14 +84,17 @@ public class NoticeService {
 	}
 	
 	public Pager boardList(Pager pager)throws Exception{
-		pager.makePageRequest();
+		// PageRequest 생성
+		pager.makePageRequest(Direction.DESC, "num");
+		
 		Page<NoticeVO> p  = noticeRepository.findByNumGreaterThanOrderByNumDesc(0, pager.getPageable());
+		
+		
 		pager.setPageList(p);
+		
+		//페이징 처리 계산
 		pager.makeNum();
-		System.out.println(p.isFirst());
-		System.out.println(p.isLast());
-		System.out.println(p.getNumber());
-		System.out.println(p.getTotalPages());
+		
 		
 		return pager;
 	}

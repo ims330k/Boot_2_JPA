@@ -3,6 +3,8 @@ package com.iu.b1.util;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -47,8 +49,8 @@ public class Pager {
 
 
 	
-	public void makePageRequest() {
-		this.pageable = PageRequest.of(this.getCurPage(), this.getPerPage());
+	public void makePageRequest(Direction direction, String name) {
+		this.pageable = PageRequest.of(this.getCurPage(), this.getPerPage(),direction, name);
 	}
 
 	
@@ -59,6 +61,8 @@ public class Pager {
 		}
 		
 	}
+	
+	
 	
 
 	
