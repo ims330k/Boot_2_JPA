@@ -88,7 +88,11 @@ public class NoticeService {
 		//Sort.by("num").descending().and(Sort.by("").ascending()
 		pager.makePageRequest(Sort.by("num").descending());
 		
-		Page<NoticeVO> p  = noticeRepository.findByNumGreaterThan(0, pager.getPageable());
+		
+		
+		//Page<NoticeVO> p  = noticeRepository.findByNumGreaterThan(0, pager.getPageable());
+		Page<NoticeVO> p = noticeRepository.findByTitleContainingAndNumGreaterThan("1", 0, pager.getPageable());
+		
 		
 		
 		pager.setPageList(p);

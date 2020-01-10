@@ -15,6 +15,8 @@ public interface NoticeRepository extends JpaRepository<NoticeVO, Integer> {
 	//@Query("select n from notice n where num>0 order by num desc")
 	Page <NoticeVO> findByNumGreaterThan(int num, Pageable pageable) throws Exception;
 	
+	Page <NoticeVO> findByTitleContainingAndNumGreaterThan(String title, int num, Pageable pageable)throws Exception;
+	
 
 	
 	
